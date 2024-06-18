@@ -98,8 +98,6 @@ function updateFieldScope() {
         status)
             STATUS_FIELD_ID=$(extractFieldID "Status")
             STATUS_FIELD_VALUE_ID=$(extractFieldNodeSingleSelectSettingValue "Status" "$RESOURCE_NODE_VALUE")
-            response=$(updateSingleSelectField "$PROJECT_UUID" "$PROJECT_ITEM_UUID" "$STATUS_FIELD_ID" "$STATUS_FIELD_VALUE_ID")
-            log="$log\n$response"
 
             if [ "$MOVE_RELATED_ISSUES" = "true" ]; then
                 prdata=$(getPullRequestByNodeID $RESOURCE_NODE_ID)
