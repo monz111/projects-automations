@@ -98,6 +98,10 @@ function updateFieldScope() {
         status)
             STATUS_FIELD_ID=$(extractFieldID "Status")
             STATUS_FIELD_VALUE_ID=$(extractFieldNodeSingleSelectSettingValue "Status" "$RESOURCE_NODE_VALUE")
+            if [ "$MOVE_RELATED_ISSUES" = "false" ]; then
+                response=$(updateSingleSelectField "$PROJECT_UUID" "$PROJECT_ITEM_UUID" "$STATUS_FIELD_ID" "$STATUS_FIELD_VALUE_ID")
+                log="$log\n$response"
+            fi
 
             if [ "$MOVE_RELATED_ISSUES" = "true" ]; then
                 prdata=$(getPullRequestByNodeID $RESOURCE_NODE_ID)
@@ -179,6 +183,9 @@ case "$ENTRYPOINT_MODE" in
         PROJECT_UUID=$(getOrganizationProjectID "$ORG_OR_USER_NAME" "$PROJECT_ID")
         echo "PROJECT_UUID: $PROJECT_UUID"
         getOrganizationProjectFields "$PROJECT_UUID"
+        if [ "$MOVE_RELATED_ISSUES" = "false" ]; then
+            PROJECT_ITEM_UUID=$(getItemID $PROJECT_UUID $RESOURCE_NODE_ID)
+        fi
 
         updateFieldScope
         ;;
