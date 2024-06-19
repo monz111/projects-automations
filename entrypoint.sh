@@ -179,7 +179,6 @@ case "$ENTRYPOINT_MODE" in
         PROJECT_UUID=$(getOrganizationProjectID "$ORG_OR_USER_NAME" "$PROJECT_ID")
         echo "PROJECT_UUID: $PROJECT_UUID"
         getOrganizationProjectFields "$PROJECT_UUID"
-        PROJECT_ITEM_UUID=$(getItemID $PROJECT_UUID $RESOURCE_NODE_ID)
 
         updateFieldScope
         ;;
